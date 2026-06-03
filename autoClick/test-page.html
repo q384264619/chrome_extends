@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自动点击助手 - 测试页面</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 800px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 32px;
+        }
+
+        .subtitle {
+            color: #7f8c8d;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+
+        .test-section {
+            margin-bottom: 40px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            border-left: 4px solid #3498db;
+        }
+
+        .test-section h2 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        .test-section p {
+            color: #7f8c8d;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .btn-primary {
+            background: #3498db;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #2980b9;
+        }
+
+        .btn-success {
+            background: #2ecc71;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #27ae60;
+        }
+
+        .btn-warning {
+            background: #f39c12;
+            color: white;
+        }
+
+        .btn-warning:hover {
+            background: #e67e22;
+        }
+
+        .btn-danger {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #c0392b;
+        }
+
+        .selector-info {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        .selector-info code {
+            color: #3498db;
+            font-weight: bold;
+        }
+
+        .click-counter {
+            margin-top: 20px;
+            padding: 15px;
+            background: #e8f5e9;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 18px;
+            color: #2e7d32;
+            font-weight: 600;
+        }
+
+        .instructions {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .instructions h3 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+
+        .instructions ol {
+            color: #856404;
+            padding-left: 20px;
+        }
+
+        .instructions li {
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+
+        .hidden-element {
+            display: none;
+        }
+
+        .disabled-button {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            color: #95a5a6;
+            font-size: 14px;
+        }
+
+        footer a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎯 自动点击助手测试页面</h1>
+        <p class="subtitle">使用此页面测试插件的各种功能</p>
+
+        <!-- 测试区域1：基本按钮 -->
+        <div class="test-section">
+            <h2>测试1：基本按钮点击</h2>
+            <p>这些是最基本的按钮，适合测试简单的点击功能。</p>
+            
+            <div class="button-group">
+                <button id="test-btn-1" class="btn-primary">主要按钮</button>
+                <button id="test-btn-2" class="btn-success">成功按钮</button>
+                <button id="test-btn-3" class="btn-warning">警告按钮</button>
+                <button id="test-btn-4" class="btn-danger">危险按钮</button>
+            </div>
+
+            <div class="selector-info">
+                <strong>CSS选择器：</strong><br>
+                <code>#test-btn-1</code> - 主要按钮<br>
+                <code>#test-btn-2</code> - 成功按钮<br>
+                <code>.btn-primary</code> - 所有主要按钮<br>
+                <code>button</code> - 所有按钮
+            </div>
+
+            <div class="click-counter" id="counter1">
+                点击次数：0
+            </div>
+        </div>
+
+        <!-- 测试区域2：类选择器 -->
+        <div class="test-section">
+            <h2>测试2：类选择器</h2>
+            <p>这些按钮共享相同的类名，可以测试类选择器的功能。</p>
+            
+            <div class="button-group">
+                <button class="action-btn btn-primary">操作按钮 1</button>
+                <button class="action-btn btn-success">操作按钮 2</button>
+                <button class="action-btn btn-warning">操作按钮 3</button>
+            </div>
+
+            <div class="selector-info">
+                <strong>CSS选择器：</strong><br>
+                <code>.action-btn</code> - 所有操作按钮<br>
+                <code>.action-btn.btn-primary</code> - 主要的操作按钮
+            </div>
+
+            <div class="click-counter" id="counter2">
+                点击次数：0
+            </div>
+        </div>
+
+        <!-- 测试区域3：属性选择器 -->
+        <div class="test-section">
+            <h2>测试3：属性选择器</h2>
+            <p>这些按钮有不同的data属性，可以测试属性选择器。</p>
+            
+            <div class="button-group">
+                <button data-action="submit" class="btn-primary">提交</button>
+                <button data-action="cancel" class="btn-danger">取消</button>
+                <button data-action="save" class="btn-success">保存</button>
+            </div>
+
+            <div class="selector-info">
+                <strong>CSS选择器：</strong><br>
+                <code>[data-action="submit"]</code> - 提交按钮<br>
+                <code>[data-action]</code> - 所有带data-action的按钮
+            </div>
+
+            <div class="click-counter" id="counter3">
+                点击次数：0
+            </div>
+        </div>
+
+        <!-- 测试区域4：特殊状态 -->
+        <div class="test-section">
+            <h2>测试4：特殊状态元素</h2>
+            <p>这些元素有不同的状态，用于测试插件的可见性检测。</p>
+            
+            <div class="button-group">
+                <button id="visible-btn" class="btn-primary">可见按钮</button>
+                <button id="hidden-btn" class="btn-primary hidden-element">隐藏按钮</button>
+                <button id="disabled-btn" class="btn-primary disabled-button" disabled>禁用按钮</button>
+            </div>
+
+            <div class="selector-info">
+                <strong>CSS选择器：</strong><br>
+                <code>#visible-btn</code> - 可见按钮（✓ 可以被点击）<br>
+                <code>#hidden-btn</code> - 隐藏按钮（✗ 不会被点击）<br>
+                <code>#disabled-btn</code> - 禁用按钮（✗ 不会被点击）
+            </div>
+        </div>
+
+        <!-- 使用说明 -->
+        <div class="instructions">
+            <h3>📖 如何使用此测试页面</h3>
+            <ol>
+                <li><strong>安装插件</strong>：按照 INSTALL.md 的说明安装插件</li>
+                <li><strong>打开此页面</strong>：在浏览器中打开这个测试页面</li>
+                <li><strong>创建任务</strong>：
+                    <ul style="margin-top: 8px; margin-left: 20px;">
+                        <li>点击浏览器工具栏的插件图标</li>
+                        <li>点击"+ 添加任务"</li>
+                        <li>输入任务名称（如：测试点击）</li>
+                        <li>输入CSS选择器（如：<code>#test-btn-1</code>）</li>
+                        <li>选择"不设定时间"和"不设定频率"</li>
+                        <li>选择"单次触发"</li>
+                        <li>点击"保存"</li>
+                    </ul>
+                </li>
+                <li><strong>观察结果</strong>：
+                    <ul style="margin-top: 8px; margin-left: 20px;">
+                        <li>按钮应该被自动点击</li>
+                        <li>右上角会显示通知</li>
+                        <li>点击计数器会增加</li>
+                    </ul>
+                </li>
+                <li><strong>尝试更多</strong>：
+                    <ul style="margin-top: 8px; margin-left: 20px;">
+                        <li>尝试不同的CSS选择器</li>
+                        <li>创建定时任务</li>
+                        <li>测试循环触发</li>
+                        <li>查看Console日志</li>
+                    </ul>
+                </li>
+            </ol>
+        </div>
+
+        <footer>
+            <p>🎯 自动点击助手 v1.0.0 | 
+            <a href="README.md">文档</a> | 
+            <a href="QUICKSTART.md">快速开始</a></p>
+        </footer>
+    </div>
+
+    <script>
+        // 点击计数器
+        let counters = {
+            counter1: 0,
+            counter2: 0,
+            counter3: 0
+        };
+
+        // 为所有按钮添加点击事件
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                // 跳过禁用按钮
+                if (this.disabled) return;
+                
+                // 更新计数器
+                const section = this.closest('.test-section');
+                if (section) {
+                    const counter = section.querySelector('.click-counter');
+                    if (counter) {
+                        const counterId = counter.id;
+                        counters[counterId]++;
+                        counter.textContent = `点击次数：${counters[counterId]}`;
+                        
+                        // 添加动画效果
+                        counter.style.transform = 'scale(1.1)';
+                        setTimeout(() => {
+                            counter.style.transform = 'scale(1)';
+                        }, 200);
+                    }
+                }
+                
+                console.log(`[测试页面] 按钮被点击: ${this.textContent || this.id}`);
+            });
+        });
+
+        // 页面加载完成提示
+        window.addEventListener('load', () => {
+            console.log('[测试页面] 页面已加载完成，可以开始测试插件功能');
+            console.log('[测试页面] 提示：按F12打开开发者工具查看详细日志');
+        });
+    </script>
+</body>
+</html>
